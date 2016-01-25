@@ -65,7 +65,7 @@ export class App {
     }
     const day = date.date();
     const daystr = date.format('DD');
-    
+
     return {
       summary: course.lesson_name,
       description: `${course.lesson_name} (${course.lesson_type})\nВикладач: ${course.teacher_name}`,
@@ -83,21 +83,21 @@ export class App {
       location: `НТУУ "КПІ" (${course.lesson_room})`
     };
   }
-    
+
   getGoogleTokenPromise() {
     if (this.googleAccessToken) {
       return Promise.resolve(this.googleAccessToken);
     }
-    
+
     return new Promise((resolve, reject) => {
-      const tab = window.open( 
+      const tab = window.open(
         'https://accounts.google.com/o/oauth2/v2/auth?' +
         'scope=https://www.googleapis.com/auth/calendar&' +
         'response_type=token&' +
         'client_id=107429331396-ju6s4ssmt3tjo2ndpoli34turtkod612.apps.googleusercontent.com&' +
         `redirect_uri=${document.location.protocol}//${document.location.host}/authsuccess`,
         "Authentication", "height=1000,width=1000,modal=yes,alwaysRaised=yes");
-        
+
       const timer = setInterval(() => {
         const successMatches = /^#access_token=(.*)&token_type/.exec(tab.document.location.hash);
         if (successMatches) {
@@ -112,7 +112,7 @@ export class App {
       }, 100);
     });
   }
-  
+
   import() {
     this.status.importing = true;
     this.getGoogleTokenPromise().then(token => {
@@ -120,39 +120,39 @@ export class App {
         .map(res => res.json())
         .subscribe(response => {
           const courses: Course[] = response.data;
-          
+
           this.status.coursesTotal = courses.length;
-          
+
           this.status.msg = 'Creating calendar';
           this.status.success = true;
-          
+
           const contentTypeJSONHeader = new Headers();
           contentTypeJSONHeader.append('Content-Type', 'application/json');
-          
+
           const calendar = {
               summary: this.calendarName,
               location: 'NTUU KPI, Kyiv, Ukraine'
           };
-          this.http.post(`https://www.googleapis.com/calendar/v3/calendars/?access_token=${token}`, 
-              JSON.stringify(calendar), 
+          this.http.post(`https://www.googleapis.com/calendar/v3/calendars/?access_token=${token}`,
+              JSON.stringify(calendar),
               {headers: contentTypeJSONHeader})
             .map(res => res.json())
             .subscribe((calendar) => {
               const ps = courses.map(course => {
                 return this.http.post(
-                    `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?access_token=${token}`, 
+                    `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?access_token=${token}`,
                     JSON.stringify(this.createCalendarEvent(course)),
                     {headers: contentTypeJSONHeader})
                   .retry(3);
               });
-              
+
               let loaded = 0;
               let errors = 0;
-              
+
               const updateStatus = () => {
                 this.status.coursesLoaded = loaded + errors;
                 this.status.success = errors === 0;
-                
+
                 if (loaded + errors !== ps.length) {
                   this.status.msg = `creating schedule: ${loaded}/${ps.length}`;
                   if (errors) {
@@ -165,7 +165,7 @@ export class App {
                   this.status.msg = 'error while creating the calendar!';
                 }
               }
-              
+
               for (let p of ps) {
                 p.subscribe(() => {
                   ++loaded;
@@ -189,6 +189,6 @@ export class App {
         }
         this.status.success = false;
       });
-    }, alert);    
+    }, alert);
   }
 }

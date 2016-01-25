@@ -26,19 +26,19 @@
       System.config({
         packages: {
           app: {
-            format: 'register', 
+            format: 'register',
             defaultExtension: 'js'
           }
         },
       });
       System.import('app/boot')
         .then(null, console.error.bind(console));
-        
+
       System.import('angular2/core')
         .then(function (core) {
           core.enableProdMode();
         });
-        
+
     </script>
     <script>
       var appInsights=window.appInsights||function(config){
@@ -46,7 +46,7 @@
       }({
           instrumentationKey:"128ce831-0196-468a-945d-9dcd34992fcf"
       });
-      
+
       window.appInsights=appInsights;
       appInsights.trackPageView();
     </script>
