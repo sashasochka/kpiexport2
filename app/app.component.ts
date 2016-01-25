@@ -104,7 +104,7 @@ export class App {
   import() {
     this.status.importing = true;
     this.getGoogleTokenPromise().then(token => {
-      this.http.get(`http://api.rozklad.org.ua/v2/groups/${this.groupName}/lessons`)
+      this.http.get(`//api.rozklad.org.ua/v2/groups/${this.groupName}/lessons`)
         .map(res => res.json())
         .subscribe(response => {
           const courses: Course[] = response.data;
