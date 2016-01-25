@@ -3,7 +3,10 @@
   <form id="inner" class="container">
     <div class="row">
       <label class="col-md-5" for="groupName">Group name: </label>
-      <input class="col-md-5 form-control" [(ngModel)]="groupName" name="groupName" type="text">
+      <input class="col-md-5 form-control" [(ngModel)]="groupName" name="groupName" type="text" list="groupNamesList">
+      <datalist id="groupNamesList">
+        <option *ngFor="#groupName of groupNames" [value]="groupName">
+      </datalist>
     </div>
     
     <div class="row">

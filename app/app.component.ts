@@ -16,6 +16,10 @@ interface Course {
   time_end: string;
 }
 
+interface Group {
+  group_full_name: string;
+}
+
 @Component({
   selector: 'app',
   templateUrl: 'app/app.component.html',
@@ -26,12 +30,14 @@ interface Course {
 export class App {
   get groupName() { return localStorage.getItem('groupName') || '' }
   set groupName(groupName) { localStorage.setItem('groupName', groupName); }
-  
+
   get calendarName() { return localStorage.getItem('calendarName') || 'KPI Schedule' }
   set calendarName(calendarName) { localStorage.setItem('calendarName', calendarName); }
-  
+
   googleAccessToken: string = undefined
-  
+
+  groupNames: string[] = [];
+
   status = {
     success: true,
     importing: false,
@@ -40,8 +46,14 @@ export class App {
     msg: ''
   }
 
-  constructor(public http: Http) { }
-    
+  constructor(public http: Http) {
+    http.get('http://api.rozklad.org.ua/v2/groups/?filter={"limit":10000}')
+      .map(res => res.json())
+      .subscribe(res =>
+        this.groupNames = res.data.map((group: Group) => group.group_full_name)
+      );
+  }
+
   createCalendarEvent(course: Course) {
     const isSecondSemester: boolean = moment().month() < 6;
     const date = moment([moment().year(), isSecondSemester ? 1 : 8, 1, 8, 0]).day(course.day_number);
