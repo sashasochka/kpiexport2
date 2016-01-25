@@ -1,0 +1,68 @@
+#main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  font-family: 'Lato', sans-serif;
+  color: #cdbfe3;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#inner {
+  width: 50rem;
+}
+
+#inner label {
+  font-size: 2rem;
+  padding: 0;
+}
+
+#save-btn {
+  width: 100%;
+}
+
+[type=button] {
+  margin-top: 1rem;
+}
+
+[type=text] {
+  font-weight: bold;
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+progress {
+  margin-top: 2rem;
+  display: block;
+  width: 100%;
+  height: 2rem;
+}
+
+.success {
+  color: rgb(78, 226, 105);
+}
+
+.error {
+  color: red;
+}
+
+.status {
+  font-size: 2rem;
+}
+
+a {
+ color: #A2C385; 
+}
+
+iframe {
+  margin-top: 2rem;
+}

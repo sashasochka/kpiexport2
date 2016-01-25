@@ -1,0 +1,35 @@
+<div id="main">
+  <h1>KPI Exporter 2.0</h1>  
+  <form id="inner" class="container">
+    <div class="row">
+      <label class="col-md-5" for="groupName">Group name: </label>
+      <input class="col-md-5 form-control" [(ngModel)]="groupName" name="groupName" type="text">
+    </div>
+    
+    <div class="row">
+      <label class="col-md-5" for="calendarName">Calendar name: </label>
+      <input class="col-md-5 form-control" [(ngModel)]="calendarName" name="calendarName" type="text">
+    </div>
+    <div class="row">
+      <input type="button" id="save-btn" class="btn btn-primary col-md-12"
+          (click)="import()" [disabled]="status.importing"
+          value="Import to Google Calendar">
+    </div>
+  </form>
+  
+  <div *ngIf="status.msg">
+    <progress *ngIf="status.coursesTotal"  min="1" [max]="status.coursesTotal" [value]="status.coursesLoaded"></progress>
+    <span class="status" [class.success]="status.success" [class.error]="!status.success">
+      Progress: <span [innerHTML]="status.msg"></span> 
+    </span>
+  </div>
+  
+  <footer>
+    <a href="https://github.com/sochka/kpiexport2/issues">Issue tracker</a>
+    <div>
+      Made by &copy; Sasha Sochka<br>
+      using rozklad.org.ua API
+    </div>
+    <iframe src="https://githubbadge.appspot.com/sochka" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe>
+  </footer>
+</div>

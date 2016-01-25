@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <script src="node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.js"></script>
+    <script src="node_modules/angular2/bundles/http.min.js"></script>
+    <script src="node_modules/angular2/bundles/router.min.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
+    <script src="node_modules/rxjs/bundles/rx.min.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,900">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        background-color: #6f5499;
+        color: white;
+      }
+    </style>
+    <script>
+      System.config({
+        packages: {
+          app: {
+            format: 'register', 
+            defaultExtension: 'js'
+          }
+        },
+      });
+      System.import('app/boot')
+        .then(null, console.error.bind(console));
+        
+      System.import('angular2/core')
+        .then(function (core) {
+          core.enableProdMode();
+        });
+        
+    </script>
+    <script>
+      var appInsights=window.appInsights||function(config){
+        function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+      }({
+          instrumentationKey:"128ce831-0196-468a-945d-9dcd34992fcf"
+      });
+      
+      window.appInsights=appInsights;
+      appInsights.trackPageView();
+    </script>
+  </head>
+  <body>
+    <app></app>
+  </body>
+</html>
