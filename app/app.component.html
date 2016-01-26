@@ -1,23 +1,16 @@
 <div id="main">
   <h1>KPI Exporter 2.0</h1>
-  <form id="inner" class="container">
-    <div class="row">
-      <label class="col-md-5" for="groupName">Group name: </label>
-      <input class="col-md-5 form-control" [(ngModel)]="groupName" name="groupName" type="text" list="groupNamesList">
-      <datalist id="groupNamesList">
-        <option *ngFor="#groupName of groupNames" [value]="groupName">
-      </datalist>
-    </div>
-
-    <div class="row">
-      <label class="col-md-5" for="calendarName">Calendar name: </label>
-      <input class="col-md-5 form-control" [(ngModel)]="calendarName" name="calendarName" type="text">
-    </div>
-    <div class="row">
-      <input type="button" id="save-btn" class="btn btn-primary col-md-12"
-          (click)="import()" [disabled]="status.importing"
-          value="Import to Google Calendar">
-    </div>
+  <form id="inner">
+    <label for="groupName">Group name: </label>
+    <input class="form-control" [(ngModel)]="groupName" name="groupName" type="text" list="groupNamesList">
+    <datalist id="groupNamesList">
+      <option *ngFor="#groupName of groupNames" [value]="groupName">
+    </datalist>
+    <label for="calendarName">Calendar name: </label>
+    <input class="form-control" [(ngModel)]="calendarName" name="calendarName" type="text">
+    <input type="button" id="save-btn" class="btn btn-primary col-md-12"
+        (click)="import()" [disabled]="status.importing"
+        value="Import to Google Calendar">
   </form>
 
   <div *ngIf="status.msg">

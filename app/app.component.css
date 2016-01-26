@@ -15,7 +15,7 @@ h1 {
 }
 
 #inner {
-  width: 50rem;
+  width: 30rem;
 }
 
 #inner label {
@@ -65,4 +65,10 @@ a {
 
 iframe {
   margin-top: 2rem;
+}
+
+@media (max-height: 30rem) {
+  footer {
+    display: none;
+  }
 }
