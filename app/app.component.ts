@@ -47,10 +47,10 @@ export class App {
   }
 
   constructor(public http: Http) {
-    http.get('http://api.rozklad.org.ua/v2/groups/?filter={"limit":10000}')
+    http.get('http://api.rozklad.org.ua/v2/groups/?filter={"showAll":true}')
       .map(res => res.json())
       .subscribe(res =>
-        this.groupNames = res.data.map((group: Group) => group.group_full_name)
+        this.groupNames = res.data.map((group: Group) => group.group_full_name.toUpperCase())
       );
   }
 
