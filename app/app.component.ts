@@ -56,14 +56,20 @@ export class App {
 
   createCalendarEvent(course: Course) {
     const isSecondSemester: boolean = moment().month() < 6;
-    const date = moment([moment().year(), isSecondSemester ? 1 : 8, 1, 8, 0]).day(course.day_number);
+    const firstStudyMonth = !isSecondSemester ? 8 : 1; // september vs february
+    const firstStudyDay = !isSecondSemester ? 1: moment([moment().year(), firstStudyMonth, 1, 0, 0]).day(8).date();
+    const date = moment([moment().year(), firstStudyMonth, firstStudyDay, 0, 0]).day(course.day_number);
+
+    // shift the date of first course day by a week for second-week schedulw
     if (course.lesson_week === '2') {
         date.add(7, 'day');
     }
+
+    // date.day() can move the date backwards. If it did move the date to august - fix it back to september.
     if (date.date() > 14 && !isSecondSemester) {
         date.add(14, 'day');
     }
-    const day = date.date();
+
     const daystr = date.format('DD');
 
     return {
@@ -143,7 +149,7 @@ export class App {
                     `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?access_token=${token}`,
                     JSON.stringify(this.createCalendarEvent(course)),
                     {headers: contentTypeJSONHeader})
-                  .retry(3);
+                  .retry(5);
               });
 
               let loaded = 0;
