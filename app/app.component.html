@@ -8,7 +8,7 @@
     </datalist>
     <label for="calendarName">Calendar name: </label>
     <input class="form-control" [(ngModel)]="calendarName" name="calendarName" type="text">
-    <input type="button" id="save-btn" class="btn btn-primary col-md-12"
+    <input type="button" id="save-btn" class="btn btn-primary"
         (click)="import()" [disabled]="status.importing"
         value="Import to Google Calendar">
   </form>
