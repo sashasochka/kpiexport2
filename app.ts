@@ -6,8 +6,8 @@ const env = process.env.NODE_ENV || 'development';
 const port = process.env.PORT ||
   (env === 'producton' || env == 'staging' ? 80 : 3000);
 
-if (env === 'production') {
-  appInsights.setup("128ce831-0196-468a-945d-9dcd34992fcf").start();
+if (env === 'production' && process.env.APP_INSIGHTS_INSTRUMENTATION_KEY) {
+  appInsights.setup(process.env.APP_INSIGHTS_INSTRUMENTATION_KEY).start();
 }
 
 app.get('/', (_: any, res: any) => {
