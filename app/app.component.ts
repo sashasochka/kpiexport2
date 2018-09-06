@@ -61,6 +61,9 @@ export class App {
     if (moment().year() === 2016 && isSecondSemester) {
       firstStudyDay = 15;
     }
+    if (moment().year() === 2018 && !isSecondSemester) {
+      firstStudyDay = 3;
+    }
     const date = moment([moment().year(), firstStudyMonth, firstStudyDay, 0, 0]).day(course.day_number);
 
     // shift the date of first course day by a week for second-week schedule
