@@ -63,8 +63,8 @@ export class App {
     }
     const date = moment([moment().year(), firstStudyMonth, firstStudyDay, 0, 0]).day(course.day_number);
 
-    // shift the date of first course day by a week for second-week schedule
-    if (course.lesson_week === '2') {
+    // shift the date of first course day by a week for second-week schedule (or for first week for 2018 and later)
+    if (course.lesson_week === (moment().year() < 2018 ? '2' : '1')) {
         date.add(7, 'day');
     }
 
