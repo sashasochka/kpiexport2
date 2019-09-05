@@ -2,5 +2,7 @@
   "files.exclude": {
     "**/*.js": true,
     "**/*.map": true
-  }
+  },
+  "appService.defaultWebAppToDeploy": "/subscriptions/0e5224ed-8039-4da6-8ccd-f0fbde565103/resourceGroups/KPIExport/providers/Microsoft.Web/sites/kpiexporter",
+  "appService.deploySubpath": ""
 }

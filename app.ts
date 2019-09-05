@@ -33,4 +33,4 @@ app.use((req: any, res: any) => {
   }
 });
 
-app.listen(port, () => console.log(`KPI Export 2 app listening on port ${port}!`));
+app.listen(port, () => console.log(`KPI Export app listening on port ${port}!`));

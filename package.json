@@ -1,6 +1,6 @@
 {
-  "name": "kpiexport2",
-  "version": "0.0.1",
+  "name": "kpiexport3",
+  "version": "3.0.0",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./app.js",
   "repository": {
@@ -16,12 +16,13 @@
   "dependencies": {
     "angular2": "2.0.0-beta.0",
     "applicationinsights": "^0.15.8",
-    "concurrently": "^1.0.0",
+    "concurrently": "^4.1.2",
     "es6-promise": "3.0.2",
     "es6-shim": "0.33.13",
     "express": "^4.13.4",
     "lite-server": "^1.2.0",
     "moment": "^2.11.1",
+    "ms": "^2.1.2",
     "reflect-metadata": "^0.1.2",
     "rxjs": "5.0.0-beta.0",
     "systemjs": "0.19.8",

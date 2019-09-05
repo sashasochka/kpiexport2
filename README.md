@@ -1,4 +1,4 @@
-# KPI Export 2.0
+# KPI Export 3.0
 
 Tool for exporting KPI schedule to Google Calendar.
 
