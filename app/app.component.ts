@@ -17,6 +17,7 @@ interface Course {
 }
 
 interface Group {
+  group_id: number;
   group_full_name: string;
 }
 
@@ -36,7 +37,7 @@ export class App {
 
   googleAccessToken: string = undefined
 
-  groupNames: string[] = [];
+  groups: Object = {};
 
   status = {
     success: true,
@@ -46,12 +47,34 @@ export class App {
     msg: ''
   }
 
+  objectKeys = Object.keys;
+
   constructor(public http: Http) {
     http.get('//api.rozklad.org.ua/v2/groups/?filter={"showAll":true}')
       .map(res => res.json())
-      .subscribe(res =>
-        this.groupNames = res.data.map((group: Group) => group.group_full_name.toUpperCase())
-      );
+      .subscribe(res => {
+        // create a map of group names and ids (some groups can have same names, so we store ids in array)
+        let ids = {};
+        res.data.forEach((group: Group) => {
+          if (group.group_full_name in ids) {
+            ids[group.group_full_name].push(group.group_id);
+          } else {
+            ids[group.group_full_name] = [group.group_id];
+          }
+        });
+
+        Object.keys(ids).forEach(groupName => {
+          if (ids[groupName].length === 1) {
+            this.groups[groupName] = ids[groupName][0];
+          } else {
+            // append group id to group name if there are multiple groups with this name
+            ids[groupName].forEach((groupID: number) => {
+              let newName = `${groupName} [${groupID}]`;
+              this.groups[newName] = groupID;
+            });
+          }
+        });
+      });
   }
 
   createCalendarEvent(course: Course) {
@@ -125,7 +148,7 @@ export class App {
   import() {
     this.status.importing = true;
     this.getGoogleTokenPromise().then(token => {
-      this.http.get(`//api.rozklad.org.ua/v2/groups/${this.groupName}/lessons`)
+      this.http.get(`//api.rozklad.org.ua/v2/groups/${this.groups[this.groupName]}/lessons`)
         .map(res => res.json())
         .subscribe(response => {
           const courses: Course[] = response.data;

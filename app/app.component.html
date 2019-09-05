@@ -4,7 +4,7 @@
     <label for="groupName">Group name: </label>
     <input class="form-control" [(ngModel)]="groupName" name="groupName" type="text" list="groupNamesList">
     <datalist id="groupNamesList">
-      <option *ngFor="#groupName of groupNames" [value]="groupName">
+      <option *ngFor="#groupName of objectKeys(groups)" [value]="groupName">
     </datalist>
     <label for="calendarName">Calendar name: </label>
     <input class="form-control" [(ngModel)]="calendarName" name="calendarName" type="text">
