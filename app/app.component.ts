@@ -147,7 +147,7 @@ export class App {
 
   import() {
     this.status.importing = true;
-    this.getGoogleTokenPromise().then(token => {
+    this.getGoogleTokenPromise().then((token: any) => {
       this.http.get(`//api.rozklad.org.ua/v2/groups/${this.groups[this.groupName]}/lessons`)
         .map(res => res.json())
         .subscribe(response => {
