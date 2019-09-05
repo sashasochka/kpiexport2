@@ -5,6 +5,8 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 declare const moment: (...args: any[]) => any;
 
+const oAuthClientId = '107429331396-6qrgk7rks33ab1v5nar5fcoi7vt2a526.apps.googleusercontent.com';
+
 interface Course {
   lesson_week: string;
   day_number: string;
@@ -126,7 +128,7 @@ export class App {
         'https://accounts.google.com/o/oauth2/v2/auth?' +
         'scope=https://www.googleapis.com/auth/calendar&' +
         'response_type=token&' +
-        'client_id=107429331396-ju6s4ssmt3tjo2ndpoli34turtkod612.apps.googleusercontent.com&' +
+        `client_id=${oAuthClientId}&` +
         `redirect_uri=${document.location.protocol}//${document.location.host}/authsuccess`,
         "Authentication", "height=1000,width=1000,modal=yes,alwaysRaised=yes");
 
